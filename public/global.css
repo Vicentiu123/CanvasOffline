@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background-color: aquamarine;
+    text-align: center;
+    padding: 60px;
+}
+a {
+    display: inline-block;
+    margin: 10px;
+    background-color: rgb(0, 111, 202);
+    color:rgb(249, 233, 212);
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    letter-spacing: 1.1px;
+}
+a:hover {
+    background-color: rgb(14, 14, 211);
+}
+.text-1{
+    font-size: 2rem;
+    line-height: 1.6rem
+}
+.text-2{
+    font-size: 1.7rem;
+    line-height: 1.3rem
+}
+
