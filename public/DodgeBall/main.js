@@ -5,7 +5,7 @@ socket.on("connect", () => console.log("Connected"));
 socket.on("disconnect", () => console.log("Disconnected"));
 
 const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d")
 const baseWidth = 1600;
 const baseHeight = 900;
 
