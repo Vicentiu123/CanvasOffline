@@ -1,6 +1,22 @@
+import { io } from "https://cdn.jsdelivr.net/npm/socket.io-client@4.8.1/dist/socket.io.esm.min.js";
+const socket = io("http://192.168.0.118:8001");
+console.log(socket);
+socket.on("connect", () => console.log("Connected"));
+socket.on("disconnect", () => console.log("Disconnected"));
+
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-console.log(canvas.width, canvas.height);
+const baseWidth = 1600;
+const baseHeight = 900;
+function resizeCanvas(){
+    const react=document.body.getBoundingClientRect();
+    const scale = Math.min(react.width/baseWidth, react.height/baseHeight);
+    canvas.style.width = `${baseWidth * (scale-0.05)}px`;
+    canvas.style.height = `${baseHeight * (scale-0.05)}px`;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
 
 const teren =  new Image;
 teren.src = "teren.png";
@@ -52,19 +68,19 @@ window.addEventListener("keyup", (e) => {
 })
 function playerMove(){
     if(w){
-        x-=7;
+        x-=10;
     }
     if(s){
-        x+=7;
+        x+=10;
     }
 }
 
 function oponentMove(){
     if(up){
-        y-=7;
+        y-=10;
     }
     if(down){
-        y+=7;
+        y+=10;
     }
 }
 let random = Math.floor(Math.random() * (10 - (-10) + 1)) + (-10);;
@@ -88,7 +104,7 @@ function ballMove() {
 }
 console.log(Math.cos(direction),Math.sin(direction));
 function bounce(){
-    random=randomNumber = Math.floor(Math.random() * (10 - (-10) + 1)) + (-10);
+    random= Math.floor(Math.random() * (10 - (-10) + 1)) + (-10);
     if(yBall-r-20<0){
         yBall=r+20;
         direction=-direction+random;
