@@ -1,5 +1,5 @@
 import { io } from "https://cdn.jsdelivr.net/npm/socket.io-client@4.8.1/dist/socket.io.esm.min.js";
-const socket = io("192.168.0.106:8004");
+const socket = io("http://192.168.0.106:8004");
 console.log(socket);
 socket.on("connect", () => console.log("Connected"));
 socket.on("disconnect", () => console.log("Disconnected"));
@@ -48,11 +48,36 @@ function shoot(x, y, dir){
     y += Math.sin(angleRadians) * speed;
     ctx.fill();
     ctx.closePath();
-    shoot(x, y, dir);
+    if( x<1600 && x>0 && y<900 && y>0 ) {
+        requestAnimationFrame(shoot);
+    }
 }
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * Draws two players on the canvas.
+ *
+ * @param {number} a - The vertical position of the first player (red).
+ * @param {number} b - The vertical position of the second player (blue).
+ */
+
+/*******  96a9cb4f-ccb3-4249-bf25-35db7f2f50ab  *******/
 function drawPlayers(a, b){
     ctx.fillStyle = "red";
     ctx.fillRect(0, a, 20, 100);
     ctx.fillStyle = "blue";
     ctx.fillRect(1600 - 20, b, 20, 100);
 }
+
+let role=-1;
+socket.on("role",(rol)  => {
+    if(role==-1){
+        role=rol;
+    }
+})
+window.addEventListener("keyup", (e) => {
+    socket.emit("keyup", { key: e.key, role });
+});
+window.addEventListener("keydown", (e) => {
+    socket.emit("keydown", { key: e.key, role });
+});
+
